@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { User } from './user.entitiy';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -17,6 +18,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User]),
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '1d' },
+    }),
   ],
 
   controllers: [AppController],

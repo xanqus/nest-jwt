@@ -12,6 +12,7 @@ const app_controller_1 = require("./app.controller");
 const user_entitiy_1 = require("./user.entitiy");
 const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
+const jwt_1 = require("@nestjs/jwt");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -28,6 +29,10 @@ AppModule = __decorate([
                 synchronize: true,
             }),
             typeorm_1.TypeOrmModule.forFeature([user_entitiy_1.User]),
+            jwt_1.JwtModule.register({
+                secret: 'secret',
+                signOptions: { expiresIn: '1d' },
+            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
